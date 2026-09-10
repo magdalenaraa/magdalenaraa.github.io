@@ -135,7 +135,7 @@
                 <br/>
                 Projects
             </h2>
-            <div id="projectsReal">
+            <!--<<div id="projectsReal">
                 <div class="project-container" style="padding-top: 40px;">
                     <a href="/professional-project/index.html" class="project-row" style="--bg-image: url('path-to-your-image1.jpg');">
                         <div class="project-left">
@@ -163,7 +163,104 @@
                         <div class="arrow">→</div>
                     </a>
                 </div>
+            </div>-->
+            <div id="projectsReal">
+        <div class="project-container" style="padding-top: 40px;">
+            <a href="javascript:void(0)" onclick="openModal(event)" class="project-row" style="--bg-image: url('path-to-your-image1.jpg');">
+                <div class="project-left">
+                    <span class="number">01</span>
+                    <h3 class="title">Professional Projects</h3>
+                </div>
+                <div class="arrow">→</div>
+            </a>
+        </div>
+        <div class="project-container">
+            <a href="javascript:void(0)" onclick="openModal(event)" class="project-row" style="--bg-image: url('path-to-your-image1.jpg');">
+                <div class="project-left">
+                    <span class="number">02</span>
+                    <h3 class="title">Personal Projects</h3>
+                </div>
+                <div class="arrow">→</div>
+            </a>
+        </div>
+        <div class="project-container">
+            <a href="javascript:void(0)" data-category="dance" onclick="openModal(event)" class="project-row" style="--bg-image: url('path-to-your-image1.jpg');">
+                <div class="project-left">
+                    <span class="number">03</span>
+                    <h3 class="title">Dance Portfolio</h3>
+                </div>
+                <div class="arrow">→</div>
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- Dynamic Modal Overlay -->
+<div id="modalOverlay" class="modal-overlay" onclick="closeModalOnBackdrop(event)">
+    <div class="modal-card">
+        <!-- Close Button -->
+        <button class="close-btn" onclick="closeModal()">&times;</button>
+
+        <!-- Header Content -->
+        <div class="modal-header">
+            <h2 class="modal-title">In the Works—<br>Take a Sneak Peek!</h2>
+            <p class="modal-subtitle">
+                This section is currently being updated with full case studies. In the meantime, explore recent highlights below:
+            </p>
+        </div>
+
+        <!-- STANDARD CONTENT (For Professional & Personal) -->
+        <div id="standardContent" class="modal-body">
+            <!-- Row 1: 3 Images -->
+            <div class="grid-row-3">
+                <div class="img-box"><img src="/img-src/fpt.png" alt="Highlight 1"></div>
+                <div class="img-box"><img src="/img-src/finishing.jpg" alt="Highlight 2"></div>
+                <div class="img-box"><img src="/img-src/thumbnail-fujiko-f-fujio.JPEG" alt="Highlight 3"></div>
             </div>
+
+            <!-- Row 2: 2 Images -->
+            <div class="grid-row-2">
+                <div class="img-box"><img src="/img-src/chirashi.jpg" alt="Highlight 4"></div>
+                <div class="img-box"><img src="/img-src/mockup_blmfix (1).png" alt="Highlight 5"></div>
+            </div>
+
+            <!-- Row 3: 2 Instagram Embeds -->
+            <div class="grid-row-2">
+                <div class="ig-embed-container">
+                    <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/CjSOahupKBk/" data-instgrm-version="14"></blockquote>
+                </div>
+                <div class="ig-embed-container">
+                    <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DavqfTvk8T_/?img_index=1" data-instgrm-version="14"></blockquote>
+                </div>
+            </div>
+        </div>
+        <!-- DANCE PORTFOLIO CONTENT (YouTube Embeds) -->
+        <div id="danceContent" class="modal-body" style="display: none;">
+            <div class="youtube-grid">
+                <!-- YouTube Embed 1 -->
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/ABheN-k4oBo?si=UhrW-lMTpNFaDjsX" title="Dance Performance 1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+
+                <!-- YouTube Embed 2 -->
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/OvY9x2dRMMY?si=daavNoottp5IPoI1" title="Dance Performance 2" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+
+                <!-- YouTube Embed 3 -->
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/pcWTgK0mgIA?si=e_qS1JnL_xUhbrCt" title="Dance Performance 2" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+
+                <!-- YouTube Embed 4 -->
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/MIyetCBIuPA?si=vSqucEf79WaIup_c" title="Dance Performance 2" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
         </div>
     </div>
 
@@ -283,6 +380,59 @@
   <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
   <script src="./script.js"></script>
+
+  <script async src="//www.instagram.com/embed.js"></script>
+
+  <script>
+   function openModal(e) {
+    if (e) e.preventDefault();
+    
+    // Find the category from the clicked link
+    const target = e.currentTarget;
+    const category = target.getAttribute('data-category');
+
+    const modal = document.getElementById('modalOverlay');
+    const standardContent = document.getElementById('standardContent');
+    const danceContent = document.getElementById('danceContent');
+
+    if (category === 'dance') {
+        // Show YouTube embeds, hide images & IG
+        standardContent.style.display = 'none';
+        danceContent.style.display = 'flex';
+    } else {
+        // Show standard layout (Images + IG)
+        standardContent.style.display = 'flex';
+        danceContent.style.display = 'none';
+
+        // Re-trigger Instagram embed rendering script
+        if (window.instgrm) {
+            window.instgrm.Embeds.process();
+        }
+    }
+
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden'; // Stop background scrolling
+}
+
+function closeModal() {
+    const modal = document.getElementById('modalOverlay');
+    modal.classList.remove('active');
+    document.body.style.overflow = ''; // Restore background scrolling
+
+    // Stop YouTube videos playing when modal closes
+    const iframes = modal.querySelectorAll('iframe');
+    iframes.forEach(iframe => {
+        const src = iframe.src;
+        iframe.src = src; // Reset iframe src stops sound
+    });
+}
+
+function closeModalOnBackdrop(event) {
+    if (event.target.id === 'modalOverlay') {
+        closeModal();
+    }
+}
+  </script>
 
   <script>
     const ticker = document.getElementById('ticker-target');
