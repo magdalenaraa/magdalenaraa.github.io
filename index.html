@@ -212,16 +212,34 @@
         <!-- STANDARD CONTENT (For Professional & Personal) -->
         <div id="standardContent" class="modal-body">
             <!-- Row 1: 3 Images -->
-            <div class="grid-row-3">
-                <div class="img-box"><img src="/img-src/fpt.png" alt="Highlight 1"></div>
-                <div class="img-box"><img src="/img-src/finishing.jpg" alt="Highlight 2"></div>
-                <div class="img-box"><img src="/img-src/thumbnail-fujiko-f-fujio.JPEG" alt="Highlight 3"></div>
+           <div class="grid-row-3">
+                <div class="img-box">
+                    <img src="/img-src/fpt.png" alt="Highlight 1" style="cursor: pointer;" onclick="openLightbox(this.src)">
+                </div>
+                <div class="img-box">
+                    <img src="/img-src/finishing.jpg" alt="Highlight 2" style="cursor: pointer;" onclick="openLightbox(this.src)">
+                </div>
+                <div class="img-box">
+                    <a href="https://drive.google.com/file/d/1k1ruEip2djUPIqZ3IOxuw5fylH_mdmKN/view?usp=drivesdk" target="_blank" rel="noopener noreferrer">
+                        <img src="/img-src/thumbnail-fujiko-f-fujio.JPEG" alt="Highlight 3" style="cursor: pointer;">
+                    </a>
+                </div>
             </div>
 
             <!-- Row 2: 2 Images -->
             <div class="grid-row-2">
-                <div class="img-box"><img src="/img-src/chirashi.jpg" alt="Highlight 4"></div>
-                <div class="img-box"><img src="/img-src/mockup_blmfix (1).png" alt="Highlight 5"></div>
+                <div class="img-box">
+                    <img src="/img-src/chirashi.jpg" alt="Highlight 4" style="cursor: pointer;" onclick="openLightbox(this.src)">
+                </div>
+                <div class="img-box">
+                    <img src="/img-src/mockup_blmfix (1).png" alt="Highlight 5" style="cursor: pointer;" onclick="openLightbox(this.src)">
+                </div>
+            </div>
+
+            <div id="lightbox" 
+                style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); justify-content:center; align-items:center; z-index:9999; cursor:pointer;" 
+                onclick="closeLightbox()">
+                <img id="lightbox-img" src="" alt="Enlarged preview" style="max-width:90%; max-height:90%; object-fit:contain; border-radius:4px;">
             </div>
 
             <!-- Row 3: 2 Instagram Embeds -->
@@ -472,5 +490,19 @@ function closeModalOnBackdrop(event) {
         });
     });
 </script>
+
+<script>
+    function openLightbox(src) {
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    lightboxImg.src = src;
+    lightbox.style.display = 'flex'; // Uses flex to trigger justify-content and align-items centering
+}
+
+function closeLightbox() {
+    document.getElementById('lightbox').style.display = 'none';
+}
+</script>
+
 </body>
 </html>
